@@ -67,3 +67,7 @@
 .cancel span {
     color: #b8b8b8;
 }
+
+.myalert{
+    border-radius: 8px;
+}

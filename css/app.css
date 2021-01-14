@@ -28,6 +28,7 @@
 
 .header {
     width: 100%;
+    height: auto;
 }
 
 .header .nav {
@@ -36,7 +37,13 @@
     color: white;
     font-size: 16px;
     line-height: 44px;
+    height: 44px;
+    padding: 0 50px;
     position: relative;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    word-break: break-all;
 }
 
 .content {
@@ -48,25 +55,32 @@
 
 .nav_btn {
     width: 40px;
-    line-height: 32px;
+    height: 44px;
+    line-height: 34px;
     position: absolute;
     font-size: 40px;
     left: 0;
     top: 0;
+    z-index: 99;
 }
 
 .nav_btn span {
     font-size: 20px;
 }
 
-
 .nav_btn_right {
     width: 40px;
-    line-height: 32px;
+    height: 44px;
+    line-height: 34px;
     position: absolute;
     font-size: 40px;
     right: 0;
     top: 0;
+    z-index: 99;
+}
+
+.nav_btn_right span {
+    font-size: 20px;
 }
 
 .card {
@@ -114,19 +128,24 @@
     content: "*";
     left: 3px;
     position: absolute;
-    color: red;
+    color: rgb(255, 106, 106);
 }
 
 .form_cot {
     text-align: right;
     float: left;
-    width: calc(100% - 100px);
+    width: calc(100%);
     padding: 0 10px;
     box-sizing: border-box;
     min-height: 1px;
     line-height: 40px;
     font-size: 14px;
 }
+
+.form_label+.form_cot {
+    width: calc(100% - 100px);
+}
+
 
 .form_cot .msg {
     vertical-align: middle;
