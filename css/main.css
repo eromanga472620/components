@@ -1,0 +1,239 @@
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+hr,
+p,
+blockquote,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+pre,
+form,
+fieldset,
+legend,
+button,
+input,
+textarea,
+th,
+td {
+    margin: 0;
+    padding: 0;
+}
+
+body,
+button,
+input,
+select,
+textarea {
+    font: 12px/1.5tahoma, arial, \5b8b\4f53;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-size: 100%;
+}
+
+address,
+cite,
+dfn,
+em,
+var {
+    font-style: normal;
+}
+
+code,
+kbd,
+pre,
+samp {
+    font-family: couriernew, courier, monospace;
+}
+
+small {
+    font-size: 12px;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+sup {
+    vertical-align: text-top;
+}
+
+sub {
+    vertical-align: text-bottom;
+}
+
+legend {
+    color: #000;
+}
+
+fieldset,
+img {
+    border: 0;
+}
+
+button,
+input,
+select,
+textarea {
+    font-size: 100%;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+input,
+textarea,
+select,
+ul,
+li,
+th,
+td,
+div {
+    box-sizing: border-box;
+}
+
+input,
+textarea,
+select {
+    padding: 0 5px;
+    border: 1px solid rgb(180, 180, 180);
+    outline: none;
+    border-radius: 3px;
+    background-color: white;
+    width: 100%;
+}
+
+th {
+    width: 100px;
+    padding: 4px;
+}
+
+table {
+    border-spacing: 0 !important;
+    border-left: solid 1px #c9c9c9;
+}
+
+td {
+    border-right: 1px solid #c9c9c9;
+    border-bottom: 1px solid #c9c9c9;
+    padding: 4px;
+}
+
+td input {
+    border: none;
+    outline: none;
+}
+
+tr {
+    border-bottom: solid 1px #c9c9c9;
+}
+
+tr th {
+    text-align: center;
+    border-right: 1px solid #c9c9c9;
+    border-top: 1px solid #c9c9c9;
+    /* background-color: rgb(106, 136, 235); */
+    color: white;
+}
+
+.pr {
+    position: relative;
+}
+
+.db {
+    display: block;
+}
+
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+
+.textc {
+    text-align: center;
+}
+
+.textl {
+    text-align: left;
+}
+
+.textr {
+    text-align: right;
+}
+
+::-webkit-input-placeholder {
+    color: rgb(173, 173, 173);
+}
+
+::-moz-placeholder {
+    color: rgb(173, 173, 173);
+}
+
+:-ms-input-placeholder {
+    color: rgb(173, 173, 173);
+}
+
+:-moz-placeholder {
+    color: rgb(173, 173, 173);
+}
+
+.clear {
+    clear: both;
+}
+
+a {
+    text-decoration: none;
+}
+
+/*正常的未被访问过的链接*/
+a:link {
+    text-decoration: none;
+}
+
+/*已经访问过的链接*/
+a:visited {
+    text-decoration: none;
+}
+
+/*鼠标划过(停留)的链接*/
+a:hover {
+    text-decoration: none;
+}
+
+/* 正在点击的链接，鼠标在元素上按下还没有松开*/
+a:active {
+    text-decoration: none;
+}
+
+/* 获得焦点的时候 鼠标松开时显示的颜色*/
+a:focus {
+    text-decoration: none;
+}

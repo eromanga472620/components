@@ -1,0 +1,193 @@
+.van-radio__label {
+    line-height: 32px;
+    color: rgb(56, 56, 56) !important;
+}
+
+.van-cell {
+    padding: 4px 10px;
+}
+
+.van-button {
+    border-radius: 6px;
+    height: 40px;
+}
+
+.van-checkbox-group .van-checkbox {
+    margin-top: 8px;
+}
+
+
+.form_cot .van-checkbox {
+    justify-content: flex-end;
+}
+
+
+.form_cot .van-checkbox__label {
+    color: #323232 !important;
+}
+
+.header {
+    width: 100%;
+}
+
+.header .nav {
+    text-align: center;
+    background-color: rgb(28, 132, 227);
+    color: white;
+    font-size: 16px;
+    line-height: 44px;
+    position: relative;
+}
+
+.content {
+    overflow-y: scroll;
+    width: 100%;
+    background-color: #f1f3f4;
+    box-sizing: border-box;
+}
+
+.nav_btn {
+    width: 40px;
+    line-height: 32px;
+    position: absolute;
+    font-size: 40px;
+    left: 0;
+    top: 0;
+}
+
+.nav_btn span {
+    font-size: 20px;
+}
+
+
+.nav_btn_right {
+    width: 40px;
+    line-height: 32px;
+    position: absolute;
+    font-size: 40px;
+    right: 0;
+    top: 0;
+}
+
+.card {
+    width: calc(100% - 20px);
+    margin: 12px 10px 0 10px;
+    background-color: white;
+    border-radius: 8px;
+}
+
+.form_item {
+    overflow: hidden;
+    position: relative;
+}
+
+.form_item+.form_item {
+    border-top: 1px solid rgb(229, 229, 229);
+}
+
+.form_label {
+    text-align: left;
+    float: left;
+    width: 100px;
+    padding: 0 10px;
+    box-sizing: border-box;
+    min-height: 1px;
+    white-space: nowrap;
+    line-height: 40px;
+}
+
+.form_item span {
+    font-size: 14px;
+}
+
+.form_cot span {
+    line-height: inherit;
+    color: rgb(192, 192, 192);
+    vertical-align: middle;
+}
+
+.form_label span {
+    line-height: inherit;
+}
+
+.require span::before {
+    content: "*";
+    left: 3px;
+    position: absolute;
+    color: red;
+}
+
+.form_cot {
+    text-align: right;
+    float: left;
+    width: calc(100% - 100px);
+    padding: 0 10px;
+    box-sizing: border-box;
+    min-height: 1px;
+    line-height: 40px;
+    font-size: 14px;
+}
+
+.form_cot .msg {
+    vertical-align: middle;
+    color: rgb(215, 215, 215);
+}
+
+.form_cot::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.form_cot>input {
+    width: calc(100% - 32px);
+    line-height: inherit;
+    text-align: right;
+    border: none;
+    outline: none;
+    font-size: 14px;
+}
+
+.form_cot>textarea {
+    text-align: right;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    line-height: 18px;
+    padding: 12px 5px;
+}
+
+.big>.form_label {
+    width: 100% !important;
+}
+
+.big>.form_cot {
+    width: 100% !important;
+    text-align: left;
+}
+
+.big input {
+    text-align: left;
+}
+
+.big textarea {
+    text-align: left;
+    padding: 0;
+}
+
+.btns_area {
+    width: 100%;
+    padding: 10px;
+}
+
+.btns_area button {
+    width: calc(50% - 8px);
+}
+
+.btns_area button+button {
+    margin-left: 10px;
+}
+
+.btns_area .fullBtn {
+    width: 100%;
+}

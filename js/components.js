@@ -14,8 +14,7 @@ Vue.component('my-select', {
             optionsShow: [],
             valueList: [],
             valueShow: null,
-            valueOld: '',
-            valueListOld: []
+            valueOld: ''
         }
     },
     props: {
@@ -27,55 +26,68 @@ Vue.component('my-select', {
             required: true
         },
         showsearch: {
-            type: Boolean,
             default: false
         },
         showicon: {
-            type: Boolean,
             default: false
         },
         multiple: {
-            type: Boolean,
             default: false
         }
+    },
+    created: function () {
+        this.initData();
     },
     watch: {
         searchTxt: function () {
             if (this.showSelect) {
                 this.optionsShow = this.options.filter(c => c.indexOf(this.searchTxt) > -1);
             }
+        },
+        value: function () {
+            this.initData();
+            this.$emit('change');
         }
     },
     methods: {
-        open: function () {
-            this.optionsShow = this.options;
-            this.showSelect = true;
+        initData: function () {
             this.valueList = [];
-            this.valueOld = this.value;
-            this.valueListOld = [];
             if (this.multiple) {
                 if (this.value && this.value !== '') {
                     this.options.forEach(element => {
                         if (element.value) {
                             if (this.value.indexOf(element.value) > -1) {
                                 this.valueList.push(element);
-                                this.valueListOld.push(element);
                             }
                         } else {
                             if (this.value.indexOf(element) > -1) {
                                 this.valueList.push(element);
-                                this.valueListOld.push(element);
                             }
                         }
                     });
                 }
             }
+            if (this.multiple) {
+                this.valueShow = '';
+                if (this.valueList.length > 0) {
+                    if (this.valueList[0].value) {
+                        this.valueShow = this.valueList.map(c => c.label).join(",");
+                    } else {
+                        this.valueShow = this.valueList.join(",");
+                    }
+                }
+            } else {
+                this.valueShow = this.value;
+            }
+        },
+        open: function () {
+            this.showSelect = true;
+            this.optionsShow = this.options;
+            this.valueOld = this.value;
         },
         selectItem: function (item) {
             if (!this.multiple) {
                 this.$emit('input', item.value ? item.value : item);
-                this.$emit('change');
-                this.valueShow = item.label ? item.label : item;
                 this.showSelect = false;
             } else if (this.multiple) {
                 if (item.value) {
@@ -108,33 +120,21 @@ Vue.component('my-select', {
                 }
             }
             this.showSelect = false;
-            this.$emit('change');
         },
         cancel: function () {
             this.$emit('input', this.valueOld);
-            this.valueShow = '';
-            if (this.valueListOld.length > 0) {
-                if (this.valueListOld[0].value) {
-                    this.valueShow = this.valueListOld.map(c => c.label).join(",");
-                } else {
-                    this.valueShow = this.valueListOld.join(",");
-                }
-            }
             this.showSelect = false;
         },
         clickoverlay: function () {
-            this.$emit('input', this.valueOld);
             if (this.multiple) {
                 this.valueShow = '';
-                if (this.valueListOld.length > 0) {
-                    if (this.valueListOld[0].value) {
-                        this.valueShow = this.valueListOld.map(c => c.label).join(",");
+                if (this.valueList.length > 0) {
+                    if (this.valueList[0].value) {
+                        this.valueShow = this.valueList.map(c => c.label).join(",");
                     } else {
-                        this.valueShow = this.valueListOld.join(",");
+                        this.valueShow = this.valueList.join(",");
                     }
                 }
-            } else {
-                this.valueShow = this.valueOld;
             }
             this.showSelect = false;
         }
@@ -170,6 +170,80 @@ Vue.component('my-select', {
              <span>取&nbsp;&nbsp;&nbsp;&nbsp;消</span>
            </div>
         </van-popup>
+       </div>
+     `
+})
+
+//  <my-date v-model="date" :type="'date'" :showicon="true" @change="selectBM"></my-select>
+//  v-model:绑定的数据
+//  type:日期空间类型，datetime，date，time
+//  showicon:是否显示最日历图标
+//  @change:数据change触发的事件
+Vue.component('my-date', {
+    data: function () {
+        return {
+            showTime: false,
+            valueOld: ''
+        }
+    },
+    props: {
+        value: {
+            required: true
+        },
+        showicon: {
+            default: false
+        },
+        type: {
+            type: String,
+            default: 'datetime'
+        }
+    },
+    watch: {
+        value: function () {
+            this.$emit('change');
+        }
+    },
+    methods: {
+        open: function () {
+            this.valueOld = this.value;
+            this.showTime = true;
+        },
+        onConfirmTime: function (val) {
+            var t = '';
+            if (this.type == 'time') {
+                t = val;
+            } else {
+                let year = val.getFullYear();
+                let month = val.getMonth() + 1;
+                let day = val.getDate();
+                let hour = val.getHours();
+                let minute = val.getMinutes();
+                if (month >= 1 && month <= 9) { month = `0${month}` };
+                if (day >= 1 && day <= 9) { day = `0${day}` };
+                if (hour >= 0 && hour <= 9) { hour = `0${hour}` };
+                if (minute >= 0 && minute <= 9) { minute = `0${minute}` };
+                if (this.type == 'date') {
+                    t = year + '-' + month + '-' + day;
+                } else if (this.type == 'datetime') {
+                    t = year + '-' + month + '-' + day + ' ' + hour + ':' + minute;
+                }
+            }
+
+            this.$emit('input', t);
+            this.showTime = false;
+        },
+        cancel: function () {
+            this.$emit('input', this.valueOld);
+            this.showTime = false;
+        }
+    },
+    template: `
+       <div>
+         <input class="selectInput" v-bind:class="{ showIcon:showicon }" v-bind:value="value" readonly placeholder="请选择时间" @click="open()">
+         <span v-if="showicon" style="font-size:24px;color:rgb(28, 132, 227)" class="iconfont icon-rili"></span>
+         <van-popup v-model="showTime" position="bottom" :close-on-click-overlay="false" @click-overlay="cancel">
+            <van-datetime-picker :type="type" @confirm="onConfirmTime" @cancel="cancel" />
+         </van-popup>
        </div>
      `
 })

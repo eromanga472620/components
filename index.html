@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <title>会议登记</title>
+  <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="msapplication-tap-highlight" content="no">
+  <meta name="theme-color" content="#4e8ef7">
+  <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+  <script type="text/javascript" src="js/vue.js"></script>
+  <script type="text/javascript" src="js/vant.min.js"></script>
+  <script type="text/javascript" src="js/components.js"></script>
+  <link rel="stylesheet" href="css/vant.css" />
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/iconfont.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+
+<body>
+  <div id="page1">
+    <div class="header">
+      <div class="nav">
+        <div class="nav_btn">
+          <span class="iconfont icon-left"></span>
+        </div>
+        <span>会议登记</span>
+      </div>
+    </div>
+    <div class="content" v-bind:style="{ height: contentHeight }">
+      <div class="card">
+        <div class="form_item">
+          <div class="form_label require">
+            <span>会议主题</span>
+          </div>
+          <div class="form_cot">
+            <input v-model="form.title" placeholder="请输入会议主题">
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="form_item big">
+          <div class="form_label require">
+            <span>会议地点</span>
+          </div>
+          <div class="form_cot">
+            <van-radio-group v-model="form.addressType" direction="horizontal">
+              <van-radio name="old">选择已有会议室</van-radio>
+              <van-radio name="new">手动编辑会议室</van-radio>
+            </van-radio-group>
+          </div>
+        </div>
+        <div class="form_item">
+          <div class="form_label"></div>
+          <div class="form_cot" v-if="form.addressType=='old'">
+            <my-select v-model="form.addresss" showicon="true" :options="addresss"></my-select>
+          </div>
+          <div class="form_cot" v-if="form.addressType=='new'">
+            <input v-model="form.addresss" placeholder="请编写会议地点">
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="form_item">
+          <div class="form_label require">
+            <span>参会人员</span>
+          </div>
+          <div class="form_cot">
+            <my-select v-model="form.userlist" showicon="true" multiple="true" :options="users"></my-select>
+          </div>
+        </div>
+        <div class="form_item">
+          <div class="form_label">
+            <span>其他参会人员</span>
+          </div>
+          <div class="form_cot">
+            <textarea rows="4" placeholder="请输入其他参会人员，多个名字请以英文逗号分开"></textarea>
+          </div>
+        </div>
+        <div class="form_item">
+          <div class="form_label">
+            <span>短信通知</span>
+          </div>
+          <div class="form_cot">
+            <van-checkbox v-model="form.duanxin" shape="square">手机短信提醒</van-checkbox>
+          </div>
+        </div>
+        <div class="form_item">
+          <div class="form_label require">
+            <span>开始时间</span>
+          </div>
+          <div class="form_cot">
+            <my-date v-model="form.startTime" :type="'datetime'" showicon="true"></my-date>
+          </div>
+        </div>
+        <div class="form_item">
+          <div class="form_label require">
+            <span>结束时间</span>
+          </div>
+          <div class="form_cot">
+            <my-date v-model="form.endTime" :type="'datetime'" showicon="true"></my-date>
+          </div>
+        </div>
+        <div class="form_item">
+          <div class="form_label">
+            <span>会议内容</span>
+          </div>
+          <div class="form_cot">
+            <textarea rows="4" placeholder="请输入会议内容"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="btns_area">
+        <van-button plain type="info">暂&nbsp;&nbsp;存</van-button>
+        <van-button type="info">发&nbsp;&nbsp;布</van-button>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
+<script>
+  var vm = new Vue({
+    el: '#page1',
+    data: {
+      users: [{ label: '马六', value: 4 }, { label: '王五', value: 3 }, { label: '张三', value: 1 }, { label: '李四', value: 2 }],
+      addresss: ['会议室1', '会议室2', '会议室3', '会议室4'],
+      showTime: false,
+      showUser: false,
+      timeSelect: '',
+      form: {
+        title: '',
+        showUser: false,
+        addressType: 'old',
+        addresss: '',
+        userlist: '',
+        duanxin: true,
+        startTime: null,
+        endTime: null
+      },
+      contentHeight: 'auto'
+    },
+    created: function () {
+      setTimeout(() => {
+        this.setContentHeight();
+      }, 0);
+    },
+    mounted: function () {
+      var inst = this;
+      window.onresize = function () {
+        inst.setContentHeight();
+      }
+    },
+    methods: {
+      setContentHeight: function () { // 设置滑动高度
+        var h = $('.header').height();
+        this.contentHeight = (document.documentElement.clientHeight - h) + 'px';
+      }
+    }
+  })
+</script>
+
+<style scoped>
+</style>
