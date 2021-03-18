@@ -205,7 +205,9 @@ tr th {
     color: rgb(173, 173, 173);
 }
 
-.clear {
+.clear::after {
+    content: "";
+    display: block;
     clear: both;
 }
 

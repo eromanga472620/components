@@ -68,6 +68,14 @@
     color: #b8b8b8;
 }
 
-.myalert{
+.myalert {
     border-radius: 8px;
+}
+
+.my_select .iconfont {
+    font-size: 18px !important;
+}
+
+.my_date .iconfont {
+    font-size: 18px !important;
 }
