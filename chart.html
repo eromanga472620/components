@@ -1,92 +1,97 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <title></title>
+    <meta
+      name="viewport"
+      content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="theme-color" content="#4e8ef7" />
+    <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="js/vue.js"></script>
+    <script type="text/javascript" src="js/vant.min.js"></script>
+    <script type="text/javascript" src="js/components.js"></script>
+    <script type="text/javascript" src="js/echarts.js"></script>
+    <link rel="stylesheet" href="css/vant.css" />
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/app.css" />
+    <link rel="stylesheet" href="css/iconfont.css" />
+    <link rel="stylesheet" href="css/components.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <title></title>
-  <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta name="format-detection" content="telephone=no">
-  <meta name="msapplication-tap-highlight" content="no">
-  <meta name="theme-color" content="#4e8ef7">
-  <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
-  <script type="text/javascript" src="js/vue.js"></script>
-  <script type="text/javascript" src="js/vant.min.js"></script>
-  <script type="text/javascript" src="js/components.js"></script>
-  <script type="text/javascript" src="js/echarts.js"></script>
-  <link rel="stylesheet" href="css/vant.css" />
-  <link rel="stylesheet" href="css/main.css">
-  <link rel="stylesheet" href="css/app.css">
-  <link rel="stylesheet" href="css/iconfont.css">
-  <link rel="stylesheet" href="css/components.css">
-</head>
-
-<body style="background-color:#151f44">
-  <div style="width:260px;height:285px" id="jdqk_chart"></div>
-</body>
-
+  <body style="background-color: #151f44">
+    <div style="width: 260px; height: 285px" id="jdqk_chart"></div>
+  </body>
 </html>
 <script>
   $(function () {
-    var chartDom = document.getElementById('jdqk_chart');
+    var chartDom = document.getElementById("jdqk_chart");
     var myChart = echarts.init(chartDom);
     var option;
+    var sdad = "";
 
     option = {
       tooltip: {
-        formatter: '{a} <br/>{b} : {c}%'
+        formatter: "{a} <br/>{b} : {c}%",
       },
-      series: [{
-        name: 'Pressure',
-        type: 'gauge',
-        detail: {
-          formatter: '{value}%',
-          textStyle: {
-            fontSize: 14,
-            color: '#fff'
-          }
+      series: [
+        {
+          name: "Pressure",
+          type: "gauge",
+          detail: {
+            formatter: "{value}%",
+            textStyle: {
+              fontSize: 14,
+              color: "#fff",
+            },
+          },
+          axisLine: {
+            lineStyle: {
+              color: [[1, "#5be7f4"]],
+              width: 4,
+            },
+          },
+          axisTick: {
+            distance: 0,
+            lineStyle: {
+              color: "#5be7f4",
+              width: 2,
+            },
+          },
+          splitLine: {
+            show: true,
+            length: 10,
+            distance: 0,
+            lineStyle: {
+              color: "#d9bc34",
+              width: 2,
+            },
+          },
+          axisLabel: {
+            distance: 5,
+            color: "#fff",
+          },
+          pointer: {
+            length: "30%",
+            width: 4,
+            itemStyle: {
+              color: "#f10706",
+            },
+          },
+          data: [
+            {
+              value: 56,
+            },
+          ],
         },
-        axisLine: {
-          lineStyle: {
-            color: [[1, '#5be7f4']],
-            width: 4
-          }
-        },
-        axisTick: {
-          distance: 0,
-          lineStyle: {
-            color: '#5be7f4',
-            width: 2
-          }
-        },
-        splitLine: {
-          show: true,
-          length: 10,
-          distance: 0,
-          lineStyle: {
-            color: "#d9bc34",
-            width: 2
-          }
-        },
-        axisLabel: {
-          distance: 5,
-          color: '#fff'
-        },
-        pointer: {
-          length: '30%',
-          width: 4,
-          itemStyle: {
-            color: '#f10706'
-          }
-        },
-        data: [{
-          value: 56
-        }]
-      }]
+      ],
     };
 
     option && myChart.setOption(option);
-  })
+  });
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

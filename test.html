@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page session="true" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<html>
+<head>
+<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+	<title>南通市电子政务工作平台</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/zfboa/css/style.css">
+	<script src="<%= request.getContextPath() %>/js/jquery.min.js"></script>
+	<script src="<%= request.getContextPath() %>/js/jquery.SuperSlide.js"></script>
+
+	<script src="<%= request.getContextPath() %>/js/layer/layer.js" type="text/javascript"></script>
+	
+	<script src="<%= request.getContextPath()%>/js/ca_js/mToken.js" type="text/javascript"></script>
+	<script src="<%= request.getContextPath() %>/js/ca_js/base64.js" type="text/javascript"></script>
+<!--	<script src="<%= request.getContextPath() %>/js/ca_js/mTokenBasicOper.js" type="text/javascript"></script>-->
+	<script src="<%= request.getContextPath() %>/js/ca_js/mToken_QRCode.js" type="text/javascript"></script>
+	<script src="<%= request.getContextPath() %>/js/ca_js/mToken_RAClient.js" type="text/javascript"></script>
+    <script type="text/javascript">  
+        function reImg(){  
+            var img = document.getElementById("Img");  
+            img.src = "Img?rnd=" + Math.random();  
+        }  
+    </script>   
+
+	<style src='<%= request.getContextPath() %>/zfboa/css/style.css'>
+		
+	</style>
+	
+	<style>
+		.modifyPW {width:240px;margin:10px auto;}
+		.modifyPW .rowDiv {padding:5px 0;text-align:right;}
+		.modifyPW .rowDiv span {margin-right:5px;}
+		.modifyPW .rowDiv input {width:130px;text-align:left;flaot:right;}
+		body .demo-class .layui-layer-title{background:#c00; color:#fff; border: none;}
+		body .demo-class .layui-layer-btn{border-top:1px solid #E9E7E7}
+		body .demo-class .layui-layer-btn .layui-layer-btn1{background:coral}
+
+	</style>
+</head>
+<body onLoad="">
+<object id="test" classid="clsid:C966EBD9-49E9-4E9C-B854-270861C58382" width="0" height="0"></object>
+<div class="login">
+    <div class="logo">
+        <img src="<%= request.getContextPath() %>/zfboa/img/logo.png">
+    </div>
+    <div class="main" style="width: 480px;height: 315px;margin-left: 375px;border-radius: 15px">
+        <div class="img" style="display:none">
+            <ul>
+                <li class="word"><a href="#" onclick="goToHref('bzrsczythpt')"><img src="<%= request.getContextPath() %>/zfboa/img/ico1.png"><span>编制人事财政<br>一体化平台</span></a>
+                </li>
+                <li><a href=""><img src="<%= request.getContextPath() %>/zfboa/img/img1.png"></a></li>
+                <li class="word"><a href="#" onclick="goToHref('czzhywpt')"><img src="<%= request.getContextPath() %>/zfboa/img/ico2.png"><span>财政综合业务平台</span></a>
+                </li>
+                <li class="word"><a href="#" onclick="goToHref('jmsdrj')"><img src="<%= request.getContextPath() %>/zfboa/img/img2.png"><span>江民杀毒软件</span></a></li>
+                <li><a href=""><img src="<%= request.getContextPath() %>/zfboa/img/img3.png"></a></li>
+                <li class="word"><a href="#" onclick="goToHref('dyxxxt')"><img
+                        src="<%= request.getContextPath() %>/zfboa/img/ico4.png"><span>党员信息系统</span></a></li>
+                <li><a href=""><img src="<%= request.getContextPath() %>/zfboa/img/img4.png"></a></li>
+                <li class="word"><a href=""><img src="<%= request.getContextPath() %>/zfboa/img/ico5.png"><span>政务云管理平台</span></a>
+                </li>
+            </ul>
+        </div>
+        <div class="" style="position: absolute;margin-top: 20px;">
+            <!-- <div class="changes" onclick="changelog()"></div> -->
+          
+                <div class="" style="width: 430px;margin-left: 20px;">
+			  <form:form method="post" id="fm1" cssClass="fm-v clearfix" commandName="${commandName}" htmlEscape="true" >
+				 <form:errors path="*" cssClass="errors" id="status" element="div" />
+                    <div class="title" style="border-bottom: 2px solid #D20508;color: #D20508;"><span style="border-bottom: 3px solid #D20508;font-size: 20px;">用户登录</span></div>
+                    <div class="info" style="margin-top: 25px;margin-left: 100px;" id='loginNameDIV'>
+                        <span class="ico" style="display:none"><img src="<%= request.getContextPath() %>/zfboa/img/user_ico.png"></span>
+						<span style="width: 90px;height: 36px;position: absolute;top: 60px;left: 50px;">用户名：</span>
+						<input type="text" id="username" name="username" placeholder="请输入用户名" style="color:black">
+                    </div>
+                    <div class="info" style="margin-top: 25px;margin-left: 100px;" id='loginPwdDIV'>
+                        <span class="ico" style="display:none"><img src="<%= request.getContextPath() %>/zfboa/img/pwd_ico.png"></span>
+						<span style="width: 90px;height: 36px;position: absolute;top: 127px;left: 65px;">密码：</span>
+						<input type="password" id="password" name="password" placeholder="请输入密码">
+                    </div>
+					 <div class="info" id='passwordCA' style='display:none;'>
+                        <span class="ico"><img src="<%= request.getContextPath() %>/zfboa/img/pwd_ico.png"></span>
+						<input  id="pwdCA" name="pwdCA" placeholder="请输入CA密码">
+                    </div>
+                    <div class="rem" id='jzpwd' style="margin-left: 100px;">
+						<input type="checkbox" id="rPassword" onclick="rem()">记住密码
+						<input type="hidden" name="lt" value="${flowExecutionKey}" />
+						<input type="hidden" name="_eventId" value="submit" />
+					</div>
+					</form:form>
+				<!--
+				  <div class="btn">
+						<button type="submit" id="button"  name="submit">账号登录</button>
+						<button onclick='#'  style="background-color: #f9a035;margin-left: 5px">CA登录</button>
+					</div>-->
+					<div class="btn" style="width: 350px;">
+						<button  id="loginButton" onclick='checkPasswordSubmit()' name="loginButton" style="margin-left: 65px;width: 105px;height: 35px;border-radius: 5px;background-color: #D20508;">登录</button>
+						<button onclick='clearInput()'  style="background-color: #cea34de6;margin-left: 5px;width: 105px;height: 35px;border-radius: 5px;">取消</button>
+						<button class="btn1 fl" onclick="checkKeySubmit()" style="margin-left: 65px;width: 105px;height: 35px;border-radius: 5px;background-color: #D20508;display: none;">KEY登录</button>
+						<button onclick='editPassword()'  style="background-color: #cea34de6;margin-left: 5px;width: 105px;height: 35px;border-radius: 5px;margin-top: 3px;display: none;">修改</button>
+					</div>
+                  
+				 </div>
+				
+				<!---->
+				
+				
+                <div class="down_con none">
+                    <div class="down1"><img src="<%= request.getContextPath() %>/zfboa/img/android.png" style="width:104px;height:104px;"></div>
+                    <div class="down2"><img src="<%= request.getContextPath() %>/zfboa/img/ios.png" style="width:104px;height:104px;"></div>
+                </div>
+				
+				<div id="modifyPW" class="modifyPW layui-layer-wrap" style="display: none;">
+					<input id="loginName" type="hidden" value="">
+					<div class="rowDiv"><span>老密码：</span><input id="oldPwd" type="password"></div>
+					<div class="rowDiv"><span>新密码：</span><input id="pwd" type="password"></div>
+					<div class="rowDiv"><span>确认新密码：</span><input id="pwd2" type="password"></div>
+				</div>
+				
+				<div id="tishi"  style="display: none;padding-top: 30px;padding-left: 10px;padding-right: 10px;padding-bottom: 10px;line-height: 1.5;">
+					<p style="text-indent:2em;">根据市网信办要求，公司近期将组织开展系统弱口令专项整治行动。</p>
+					<p style="text-indent:2em;">系统检测到当前账户密码不符合网络安全要求，请尽快更改密码，4月25日后不符合要求的账户将无法登陆系统。</p>
+				</div>
+				
+			
+        </div>
+    </div>
+</div>
+
+
+<div class="clear"></div>
+<!--<div class="footer">
+    <span>建设单位：南通市大数据管理局</span><span>联系电话：85216789</span><br>
+    <span>技术支持：江苏中威科技软件系统有限公司</span>
+</div>-->
+<div class="footer">
+ <!--<img src="<%= request.getContextPath() %>/zfboa/img/footer.png" style="width:100%"><a href="http://2.82.7.77" title="下载中心"></a>-->
+	<object id="OCXpdfobj"  TYPE="application/x-itst-activex" style="width:1px;height:1px;" clsid="{780F13F8-A5BB-4514-B17E-D2BF39A8653C}"></object>
+ </div>
+
+	<iframe style="display:none;" src="" id="downLoad" name="downLoad"></iframe>
+       
+   
+         <script type="text/javascript">
+			function editPassword(){
+				layer.open({
+					content:$("#modifyPW"),//修改密码页面地址
+					type:1,
+					shade: 0,
+					offset: 'rt',
+					skin: 'demo-class',
+					title:"密码修改",
+					area:["400px","250px"],//大小自己调整
+					btn:"确定",
+					yes:function(index,layero){
+						$("#loginName").val($("#username").val())
+						var ssoUrl = "http://192.168.0.166:18084/TrueIDS/";
+						if($("#pwd").val()!=$("#pwd2").val()){
+							layer.msg("两次输入新密码不同");
+							$("#pwd").val("");
+							$("#pwd2").val("");
+							$("#oldPwd").val("");
+							return;
+						}else if($("#oldPwd").val()==""||$("#pwd").val()==""){
+							layer.msg("密码不能为空");
+							$("#pwd").val("");
+							$("#pwd2").val("");
+							$("#oldPwd").val("");
+							return;
+						}
+						$.ajax({
+							 type: "POST",
+							 url: ssoUrl+"user/modifyPwd?callback=?",
+							 dataType:"jsonp",
+							 async : true,
+							 data:{"loginName":$("#loginName").val(),"oldPwd":$("#oldPwd").val(),"pwd":$("#pwd").val()},
+							 success: function (mes){
+								 if(mes.success==false){
+									 
+								 }else{
+									 //$("#loginName").val("");
+									 $("#oldPwd").val("");
+									 $("#pwd").val("");
+									 $("#pwd2").val("");
+									 layer.close(index);
+								 }
+								 layer.msg(mes.info);
+							 }
+						}); 
+					}
+				});
+			}
+			
+			//验证是否可登录
+			var loginflag = false;
+			var timeid = window.setInterval(function(){
+				console.log(1);
+				if(loginflag){
+					console.log(2);
+					var  form = $("#fm1");
+					form.submit();
+				}
+			},2000);
+			//用户名密码登录认证
+			function checkPasswordSubmit(){
+				var username = $("#username").val();
+				var password = $("#password").val();
+				var  form = $("#fm1");
+				//ids账号密码存在验证
+				 // form.submit();
+				//验证是否首次登录
+				var firstlogin = false;
+				//验证有效期
+				var intimelogin = "1";
+				// debugger;
+				//ids验证用户名密码是否正确
+				var idsurl ='http://192.168.0.166:18084/TrueIDS/loginInJsonp?username='+username+'&password='+password;
+				$.ajax({
+					url:idsurl,
+					type:'get',
+					dataType : "jsonp",
+					jsonp: "callback",
+					success:function(res){
+						// var ret = $.parseJSON(res);
+						//ids账号密码存在验证
+						if(res.success == "true"||res.success){
+							if(res.isFirstLogin=="0"){
+								firstlogin = true;
+							}
+							//res.pwdStatus 参数：1=正常有效期内，2=提示需要修改密码，3=强制修改密码
+							if(res.pwdStatus=="2"){
+								intimelogin="2";
+							}else if(res.pwdStatus=="3"){
+								intimelogin="3";
+							}
+							// form.submit();
+							// loginflag=true;
+							// console.log(1);
+							
+							//登录成功的情况下，做其他的check处理
+						  ipCheck(firstlogin,intimelogin,username,password,form);
+						
+							
+						}else{
+							loginflag = false;
+							alert("抱歉，用户名或密码错误。");
+						}
+						
+					},
+					error:function(err){
+						loginflag = false;
+						alert("账号验证失败,请联系管理员");
+					}
+				})
+				// var timeid = window.setInterval(function(){
+					// if(loginflag){
+						// form.submit();
+					// }
+				// },2000);
+				// window.clearInterval(timeid);
+		
+			}
+			
+			
+			
+			
+			function ipCheck(firstlogin,intimelogin,username,password,form)
+			{
+				loginflag =true;
+				//如果是首次登陆，oa存储首次登陆的登录名，ip,并验证密码有效期从而点击弹出修改密码
+			
+				if(firstlogin){
+					var addurl ='http://192.168.0.166:18084/trueOA/login_addLoginIpJsonp.do'
+					$.ajax({
+						url:addurl,
+						data:{
+							'username':username
+						},
+						type:'get',
+						async:false, 
+						dataType : "jsonp",
+						jsonp: "callback",
+						success:function(res){
+							pwdCheck(firstlogin,intimelogin,username,password,form);
+							
+						},
+						error:function(err){
+							loginflag = false;
+							alert("电脑IP绑定失败!");
+							return;
+							
+						}
+					})
+					
+				}else{
+					//同一个账号登录的ip不一致,不允许登录
+					var findurl ='http://192.168.0.166:18084/trueOA/login_loginForIPJsonp.do'
+					$.ajax({
+						url:findurl,
+						data:{
+							'username':username
+						},
+						type:'get',
+						async:false, 
+						dataType : "jsonp",
+						jsonp: "callback",
+						success:function(res){
+							//console.log(ret);
+							if(res.result!="success"){
+								//ip不一致
+								loginflag = false;
+								alert("请联系管理员进行ip变更!");
+								return;
+							}else
+							{
+                                document.getElementById('fm1').submit();
+								// pwdCheck(firstlogin,intimelogin,username,password,form);
+							}
+						},
+						error:function(err){
+							loginflag = false;
+							alert("请联系管理员进行ip变更!");
+							return;
+						}
+					})
+				}
+				
+			}
+			
+			function pwdCheck(firstlogin,intimelogin,username,password,form)
+			{
+				if(intimelogin=="1"){
+					loginflag=true;
+					// $("#fm1").submit();
+					//根据有效期标识判断弹出弹窗
+				}	else if(intimelogin=="2"){
+					  // form.submit();
+					layer.open({
+					  title: '提示',
+					  type:1,
+					  offset: 'rb',
+					  shade: 0,
+					  skin: 'demo-class',
+					  content: $("#tishi"),
+					  btn:['下次再说','修改密码'],
+					  yes: function(index, layero){
+						  loginflag=true;
+						  layer.close(index);
+						  //$("#fm1").submit();
+						  document.getElementById('fm1').submit();
+					  },btn2: function(index, layero){
+						  editPassword();
+					  }
+					}); 
+				}else if(intimelogin=="3"){
+					layer.open({
+					  title: '提示',
+					  type:1,
+					  offset: 'rb',
+					  shade: 0,
+					  skin: 'demo-class',
+					  content: $("#tishi"),
+					  btn:['退出','修改密码'],
+					  yes: function(index, layero){
+						  layer.close(index);
+					  },btn2: function(index, layero){
+						  editPassword();
+					  }
+					}); 
+				}
+				
+				
+				//ids验证密码有效期
+				
+				//密码强度验证
+				//if(firstlogin)
+				//{
+				//	var reg = /^(?![a-zA-Z]+$)(?![A-Z0-9]+$)(?![A-Z._~!@#$^&*]+$)(?![a-z0-9]+$)(?![a-z._~!@#$^&*]+$)(?![0-9._~!@#$^&*]+$)[a-zA-Z0-9._~!@#$^&*]{8,}$/;
+				//	if(!reg.test(password)) {
+				//		editPassword();
+						
+				//	} 
+				//}			
+			}
+			
+			var obj = document.getElementById("test");
+
+			var base64String = "";
+
+			var challenge;
+			function GetSignAndToken() {
+				obj.SetSvrConfig("192.168.2.42", 9021);
+				var err = obj.GetSignAndToken(base64String);
+				if (err == 0) {
+					challenge = obj.bstrSignValAndToken;
+					alert(challenge);
+				} else {
+					alert("票据获取失败,错误代码：" + err);
+				}
+				return err;
+			}
+
+			function getErr() {
+				var err = obj.bstrError;
+				alert(err);
+			}
+			
+			//key登录认证
+			function checkKeySubmit(){
+				var index = layer.msg('正在登录', {
+					icon: 16,
+					shade: 0.01
+				});
+				$.post("http://192.168.0.166:18084/trueOA/login_getBase64String.do", null, function (data) {
+					var usb = new USB();
+					usb.CheckKey(function (result) {
+						var jsonObj = $.parseJSON(result);
+						if (jsonObj.IsKeyIn != 1) {
+							layer.close(index);
+							layer.msg("未检测到USB Key！",{icon:2,time:1500});
+						} else {
+							usb.Auth(data.data,function(res){
+								var json = $.parseJSON(res);
+								challenge = json.Taken;
+								$.post(
+									"http://192.168.0.166:18084/trueOA/login_ssoLoginByKey.do", {
+									"identityTicket": challenge,
+									"challenge": data.data
+									}, function (res) {
+										if(res.error){
+											layer.msg(res.error,{icon:2,time:2000});
+											return;
+										}
+										if(res.data){
+											window.location.href = res.data;
+										}else{
+											layer.msg("Key对应的账号不存在！",{icon:0,time:2000});
+										}
+								}, "json");
+							});
+						}
+					});
+				}, "json");
+			}
+			
+			function USB() {
+				var oTempObj = new Object;
+				oTempObj.callbackAuth = new Function();
+
+
+				var wsUri = "ws://127.0.0.1:31018";
+				var websocket = new WebSocket(wsUri);
+				websocket.onopen = function (evt) {
+
+
+				};
+				websocket.onclose = function (evt) {
+
+				};
+				websocket.onmessage = function (evt) {
+					if (typeof oTempObj.callbackAuth === "function")
+						oTempObj.callbackAuth(evt.data);
+				};
+				websocket.onerror = function (evt) {
+
+				};
+				function sendMessage(msg) {
+					waitForSocketConnection(websocket, function () {
+						websocket.send(msg);
+					});
+				};
+				function waitForSocketConnection(socket, callback) {
+					setTimeout(
+						function () {
+							if (socket.readyState === 1) {
+								if (callback !== undefined) {
+									callback();
+								}
+								return;
+							} else {
+								waitForSocketConnection(socket, callback);
+							}
+						}, 2);
+				};
+
+				oTempObj.Auth = function (cspName, callback) {
+					var msg = "{\"FuncName\":\"GetSignAndToken\",\"Parames\":{\"IP\":\"192.168.2.42\",\"PORT\":9021,\"svrRandom\":\"" + cspName + "\"},\"sessionID\":\"1111111\"}";
+					sendMessage(msg);
+					oTempObj.callbackAuth = callback;
+				}
+
+				oTempObj.CheckKey = function (callback) {
+					var msg = "{\"FuncName\":\"CheckKey\"}";
+					sendMessage(msg);
+					oTempObj.callbackAuth = callback;
+				}
+
+				return oTempObj;
+			}
+		  
+			function downloadTrueway(){
+				var url = "http://"+location.hostname+":"+location.port+"${pageContext.request.contextPath}";	//ajax后台获取数据
+			    var iframe = document.getElementById("downLoad");
+				iframe.src=url+"/TWChatDownLoad.jsp"
+			}
+        </script>
+		<script type="text/javascript">
+			$(".JQ_loginTab").slide({
+				titCell : ".tw-loginHead ul li",
+				mainCell : ".tw-loginBody",
+				trigger : "click"
+			});
+		</script>
+		<div class="tw-footCopy"></div>
+	
+		<script type="text/javascript">
+		function clearInput(){
+
+			document.getElementById("username").value="";
+			document.getElementById("password").value="";
+			}
+			
+			
+		 function changelog() {
+        if(!$(".login_con").hasClass("none")){
+            $(".login_con").addClass("none");
+            $(".down_con").removeClass("none");
+        }
+        else {
+            $(".login_con").removeClass("none");
+            $(".down_con").addClass("none");
+        }
+    }
+		$(function(){
+			//chatload();
+			 loginLoad();
+			 //getCAInfor();   //CA 认证开关
+		})
+
+//********************图片链接跳转IE******************************
+		function goToHref(urlCON){
+			console.log("urlCON=========="+urlCON);
+			if(urlCON=='bzrsczythpt'){	//编制人事财政一体化平台
+				OCXpdfobj.LoadIE('http://2.82.0.36:7001/ntdw');
+			}
+			if(urlCON=='dyxxxt'){	 //全国党员管理信息系统
+				OCXpdfobj.LoadIE('http://172.23.8.200/gateway-xtgl/Mh001LoginCtrl/login');
+			}
+			
+			if(urlCON=='czzhywpt'){	 //财政综合业务平台
+				OCXpdfobj.LoadIE('http://32.142.20.10');
+			}
+			if(urlCON=='jmsdrj'){	 //江民杀毒软件
+				OCXpdfobj.LoadIE('http://2.82.71.22');
+			}	
+			
+		}
+//************ca密码输入*******************
+	function updateStatus(title) {
+		layer.prompt({title: '请输入CA口令', formType: 1}, function(value, index){
+		  layer.close(index);
+		  txt_pwd=value;
+		  getCAInfor();
+		  
+		 
+		});
+	}
+
+//*******************CA 认证  开始****************************
+	    var token;// = new mToken("mTokenPlugin");
+		var deviceName;  //设备信息
+		var cerList;     //证书列表
+		var txt_pwd=111111;  //用户密码
+		var pwd_flag='yes';    //密码验证是否成功 
+		var cerType=0;    //0：加密证书，1：签名证书
+		var cert;   //导出指定数字证书
+		var cerInfo;   //证书信息
+		var is_login='no'; //是否登陆
+		var v_count=1;
+		
+	function getCAInfor(){
+		//document.getElementById("username").value='xxzxx';
+		//document.getElementById("password").value='xxzxx';
+			//if(is_login=='yes')
+			//	return;
+			excuCert();  //获取CA 信息 
+			if(pwd_flag=='no'){
+				
+			}else{
+				console.log(cerInfo);    //C=CN,ST=江苏省,O=江苏省人民政府办公厅A,OU=140500000nantongceshi020,GN=nantongceshi02,CN=南通测试02
+			var us =cerInfo.split(",")[3].split("=")[1];
+			console.log(us);
+			    $.ajax({  
+					type : "get",  
+					async:false,  
+					url : "http://2.82.7.77:8001/trueOA/login_getUserMsgByCAinfo.do?key="+us,  
+					dataType : "jsonp",//数据类型为jsonp  
+					jsonp: "callback",//服务端用于接收callback调用的function名的参数     
+					success : function(data){  
+						console.log(data.result);
+						console.log(data.username);
+						console.log(data.password);
+						console.log(data.msg);
+					if(data.result=='yes'){
+						document.getElementById("username").value=data.username;
+						document.getElementById("password").value=data.password;
+						is_login='yes';
+						var service = GetQueryString("service");
+						//var lURL="http://2.82.7.77:8000/sso/remoteLogin?service="+service+"&loginUrl="+service+"&username="+data.username+"&password="+data.password+"&submit=false&flagPwd=calogin";
+				        var lURL="http://2.82.7.77:8000/sso/remoteLogin?service=http://2.82.7.77:8001/trueOA/portalHome_portal.do?flagLogin=ca&loginUrl="
+						+service+"&username="+data.username+"&password="+data.password+"&submit=false\&flagLogin=ca";
+						console.log(lURL);
+						window.location=lURL;
+					//	window.location='http://2.82.7.77:8000/sso/remoteLogin?service=&loginUrl=http://2.82.7.77:8001/trueOA/portalHome_portal.do&username=xxzx&password=cf97321cb8da6214050801a6aa70e1e8&submit=false&flagPwd=calogin';
+					}else{
+						alert(data.msg);
+					}
+						
+					
+					},  
+					error:function(){  
+						alert('fail');  
+					}  
+				});  
+			}				
+		}
+
+	function excuCert(){
+			pwd_flag='yes';
+			token = new mToken("mTokenPlugin");
+			enumDevice();  //枚举当前设备
+			if(pwd_flag=='no')
+				return;
+			getUserList();  //获取证书列表
+			verifyUserPin();//验证用户密码
+			if(pwd_flag=='no')
+				return;
+			exportUserCert();//导出证书信息
+			getCertInfo();//获取证书信息
+		}
+		 //1枚举当前设备enumDevice
+		function enumDevice()
+		{	
+			var	ret = token.SOF_LoadLibrary(token.GM3000);
+			if(ret != 0)
+			{
+				alert("加载控件失败,错误码:" + token.SOF_GetLastError());
+				pwd_flag='no';
+				return ;
+			}
+			deviceName = token.SOF_EnumDevice();
+			if(deviceName != null)
+			{
+			}
+			else
+			{
+				alert("未找到任何key");
+				pwd_flag='no';
+				return;
+			}
+		}
+		//2获取证书列表
+		function getUserList()
+			{
+				var ret = token.SOF_GetDeviceInstance(deviceName, "");
+				if(ret != 0)
+				{
+					//alert("实例化失败,错误码:" + token.SOF_GetLastError());
+					return;
+				} 
+			  cerList = token.SOF_GetUserList();
+			  //alert(cerList+"aaa");	
+				
+			}
+			    //3验证用户密码
+		function verifyUserPin()
+		{
+			var ret = 0;
+			var strRes = "";
+			//获取UKey的类型，并按UKey类型来提示验证身份
+			var hwType = token.SOF_GetHardwareType();
+			if(hwType == token.TYPE_FPKEY)
+			{//验证用户指纹
+				//请在这里，替换更友善的用户提示...
+				//开始“用户验证指纹”的提示
+				
+				alert("当指纹KEY上的指示灯开始闪烁时，请按压手指以验证指纹......"); //Longmai的示例提示方式
+				ret = token.SOF_VerifyFingerprint();
+				
+				//结束“用户验证指纹”的提示
+				
+				if(ret == 0)
+				{
+					strRes = "验证用户指纹成功。";
+				}
+				else 
+				{
+					strRes = "验证用户指纹失败。";
+				}
+			}
+			else
+			{//验证用户密码
+				var pin =txt_pwd;                 //document.getElementById("txt_pwd").value;	
+				ret = token.SOF_Login(pin);
+				console.log(ret)
+				
+				if(ret == 0)
+				{
+					strRes = "验证用户密码成功。";
+					pwd_flag='yes';
+				}
+				else 
+				{
+					strRes = "CA密码不正确，请重新输入。";
+					pwd_flag='no'
+					alert(strRes);					
+				}
+			}
+			//alert(strRes);		
+		}
+	//4导出证书信息
+	function exportUserCert()
+	{
+		//var cerType = selectType.options[selectType.selectedIndex].value;
+		console.log(cerList[0][1]);
+		var  containerName=cerList[0][1];
+	
+		 cert  = token.SOF_ExportUserCert(containerName, cerType);
+		if(cert != null && cert != "")
+		{
+			//document.getElementById("cerInfo").value = cert;	
+		}
+		else
+			alert("获取证书信息失败,错误码:" + token.SOF_GetLastError());
+		
+	//alert(cert);
+	}
+	//5获取证书信息
+	function getCertInfo()
+	{
+		var signCert=cert;
+		var str = token.SOF_GetCertInfo(signCert, token.SGD_CERT_ISSUER_CN);	
+		cerInfo = token.SOF_GetCertInfo("", token.SGD_CERT_SUBJECT);
+	} 
+
+//************************CA 认证  结束*******************************
+	function GetQueryString(name)
+	{
+	 var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+	 var r = window.location.search.substr(1).match(reg);
+	 if(r!=null)return  unescape(r[2]); return null;
+	}	
+
+	function chatload(){
+			var username= '${username}';
+			var pass = '${pass}';
+			var action = '${server}';
+			if(username!=null && username!=''){
+				var htmlstr = "<option value='"+username+"'>"+username+"</option>";
+				 $("#username").html(htmlstr).focus();
+				document.getElementById("password").value=pass;
+				document.getElementById("button").click();
+			}
+		}
+			
+	function getParam(name){
+        var queryString = window.location.search;
+        var param = queryString.substr(1, queryString.length - 1).split("&");
+        for (var i = 0; i < param.length; i++) {
+			var keyValue = param[i].split("=");
+			if (keyValue[0] == name) 
+				return keyValue[1];
+		}
+		return null;
+	}
+
+	/**
+	 * 设置cookie
+	 * @author zhangyj  
+	 * @version 创建时间：Oct 12, 20011 2:36:50 PM 
+	 * name cookie的名称
+	 * value cookie的值 
+	 */
+	function setLoginCookie(name,value){ 
+		var   Days   =   365;   //此   cookie   将被保存   365   天 
+	    var   exp     =   new   Date();         //new   Date( "December   31,   9998 "); 
+	    exp.setTime(exp.getTime()   +   Days*24*60*60*1000); 
+	    document.cookie   =   name   +   "= "+   escape(value)   + ";expires= "+   exp.toGMTString(); 
+	}
+		/**
+	 * 根据cookie的名称得到cookie
+	 * @author zhangyj  
+	 * @version 创建时间：Oct 12, 20011 2:36:50 PM 
+	 * name cookie的名称
+	 */
+	function getLoginCookie(name){ 
+	   var cookieString = document.cookie;
+	   var arr=cookieString.split(";");
+	   for(var i=0;i<arr.length;i++){
+		    if(Trim(arr[i].split("=")[0])===name){
+				return arr[i].split("=")[1];
+		    }
+	    }
+	    return null;
+	} 
+		 function Trim(str)
+         { 
+             return str.replace(/(^\s*)|(\s*$)/g, ""); 
+     }
+	/**
+	 * 根据cookie的名称删除cookie
+	 * @author zhangyj  
+	 * @version 创建时间：Oct 12, 20011 2:36:50 PM 
+	 * name cookie的名称
+	 */
+	function delLoginCookie(name){ 
+	    var   exp   =   new   Date(); 
+	    exp.setTime(exp.getTime()   -   1); 
+	    var   cval=getLoginCookie(name); 
+	    if(cval!=null)   document.cookie=name   + "= "+cval+ ";expires= "+exp.toGMTString(); 
+	}
+	/**
+	 * 点击"记住密码"复选框触发的事件
+	 * @author zhangyj  
+	 * @version 创建时间：Oct 12, 20011 2:36:50 PM 
+	 */
+	function rem(){
+		//alert(1);
+		if(document.getElementById("rPassword").checked==true){
+			var user=document.getElementById("username").value;
+			if(user == ""){
+				alert("请填写用户名！");
+				document.getElementById("rPassword").checked=false;
+			}
+			value=document.getElementById("username").value+","+document.getElementById("password").value;
+			setLoginCookie("login",value);
+		}
+		if(document.getElementById("rPassword").checked==false){
+			delLoginCookie("login");
+		}
+	}
+	/**
+	 * 页面载入触发的事件(回填登录信息)
+	 * @author zhangyj  
+	 * @version 创建时间：Oct 12, 20011 2:36:50 PM 
+	 */
+	function loginLoad(){
+		var err=getParam("errorMessage");
+		var bool=err==null||err=="null"||err=="";
+		if(!bool){
+			delLoginCookie("login");
+			document.getElementById("rPassword").checked=false;
+		}
+		var loginCookie=unescape(getLoginCookie("login"));
+		if(loginCookie!=null&&loginCookie!="null"&&loginCookie!=""){
+			document.getElementById("username").value=loginCookie.split(",")[0];
+			document.getElementById("password").value=loginCookie.split(",")[1];
+			document.getElementById("rPassword").checked=true;
+		}else{
+			document.getElementById("rPassword").checked=false;
+		}
+	}
+	function clearLoginCook(){
+		delLoginCookie("login");
+		document.getElementById("password").value="";
+		document.getElementById("rPassword").checked=false;
+	}
+		  
+	var userAgent = navigator.userAgent, 
+	    rMsie = /(msie\s|trident.*rv:)([\w.]+)/, 
+	    rFirefox = /(firefox)\/([\w.]+)/, 
+	    rOpera = /(opera).+version\/([\w.]+)/, 
+	    rChrome = /(chrome)\/([\w.]+)/, 
+	    rSafari = /version\/([\w.]+).*(safari)/;
+    var browser;
+    var version;
+    var ua = userAgent.toLowerCase();
+    function uaMatch(ua) {
+        var match = rMsie.exec(ua);
+        if (match != null) {
+            return { browser : "IE", version : match[2] || "0" };
+        }
+        var match = rFirefox.exec(ua);
+        if (match != null) {
+            return { browser : match[1] || "", version : match[2] || "0" };
+        }
+        var match = rOpera.exec(ua);
+        if (match != null) {
+            return { browser : match[1] || "", version : match[2] || "0" };
+        }
+        var match = rChrome.exec(ua);
+        if (match != null) {
+            return { browser : match[1] || "", version : match[2] || "0" };
+        }
+        var match = rSafari.exec(ua);
+        if (match != null) {
+            return { browser : match[2] || "", version : match[1] || "0" };
+        }
+        if (match != null) {
+            return { browser : "", version : "0" };
+        }
+    }
+    var browserMatch = uaMatch(userAgent.toLowerCase());
+    if (browserMatch.browser) {
+        browser = browserMatch.browser;
+        version = browserMatch.version;
+    }
+		
+	var browderVersion = "此页面渲染的浏览器版本为" +browser+version;
+	browderVersion += "此页面的IE Document Mode为" +document.documentMode;
+	browderVersion += "UA:" +userAgent;
+//	console.log(browderVersion);
+
+	</script>
+	
+<script type="text/javascript">
+	var code ; //在全局 定义验证码   
+	function createCode()   
+	{    
+	  code = "";   
+	  var codeLength = 4;//验证码的长度   
+	  var checkCode = document.getElementById("checkCode");   
+	  var selectChar = new Array(0,1,2,3,4,5,6,7,8,9,'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');//所有候选组成验证码的字符，当然也可以用中文的      
+	  for(var i=0;i<codeLength;i++)   
+	  {   
+	   var charIndex = Math.floor(Math.random()*36);   
+	   code +=selectChar[charIndex];   
+	  }    
+	  if(checkCode)   
+	  {   
+	    //checkCode.className="code";   
+	    checkCode.value = code;
+	    checkCode.blur();   
+	  }        
+	}	
+	
+	var code_check = true;
+	$("#fm1").submit(function(ev){
+		//alert(111);
+		
+	})
+</script>
+	<script type="text/javascript">
+	function toDownTwChart(){
+		
+	}
+	</script>
+<script type="text/javascript">
+	function autoSubmit(){
+		
+		var username= '${username}';
+		var pass = '${pass}';
+		pass = 'xwq111'
+		var action = '${server}';
+		if(username!=null && username!=''){		//自动登录: url地址中携带用户名
+			document.getElementById("username").value = username;
+			document.getElementById("password").value = pass;
+		<%
+			request.getSession().setAttribute("username", "");
+			request.getSession().setAttribute("password", "");
+		%>
+		code_check  = false;
+		document.getElementById("button").click();
+		}
+	}
+	</script>
+
+</body>
+</html>

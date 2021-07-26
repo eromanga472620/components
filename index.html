@@ -2,22 +2,23 @@
 <html lang="en" dir="ltr">
 
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>会议登记</title>
-  <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta name="format-detection" content="telephone=no">
-  <meta name="msapplication-tap-highlight" content="no">
-  <meta name="theme-color" content="#4e8ef7">
+  <meta name="viewport"
+    content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="msapplication-tap-highlight" content="no" />
+  <meta name="theme-color" content="#4e8ef7" />
   <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
   <script type="text/javascript" src="js/vue.js"></script>
   <script type="text/javascript" src="js/vant.min.js"></script>
   <script type="text/javascript" src="js/components.js"></script>
   <script type="text/javascript" src="js/moment.js"></script>
   <link rel="stylesheet" href="css/vant.css" />
-  <link rel="stylesheet" href="css/main.css">
-  <link rel="stylesheet" href="css/app.css">
-  <link rel="stylesheet" href="css/iconfont.css">
-  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/app.css" />
+  <link rel="stylesheet" href="css/iconfont.css" />
+  <link rel="stylesheet" href="css/components.css" />
 </head>
 
 <body>
@@ -35,12 +36,23 @@
     </div>
     <div class="content" v-bind:style="{ height: contentHeight }">
       <div class="card">
+        <van-cell title="单元格" value="内容" size="large" label="描述信息" />
+      </div>
+      <div class="card">
         <div class="form_item">
           <div class="form_label require">
             <span>会议主题</span>
           </div>
           <div class="form_cot">
-            <input v-model="form.title" placeholder="请输入会议主题">
+            <a target="_parent" href="https://www.baidu.com/">百度</a>
+          </div>
+        </div>
+        <div class="form_item">
+          <div class="form_label require">
+            <span>会议主题</span>
+          </div>
+          <div class="form_cot">
+            <input v-model="form.title" placeholder="请输入会议主题" />
           </div>
         </div>
       </div>
@@ -61,7 +73,7 @@
             <my-select v-model="form.addresss" showicon="true" :options="addresss"></my-select>
           </div>
           <div class="form_cot" v-if="form.addressType=='new'">
-            <input v-model="form.addresss" placeholder="请编写会议地点">
+            <input v-model="form.addresss" placeholder="请编写会议地点" />
           </div>
         </div>
       </div>
@@ -127,39 +139,82 @@
 </html>
 <script>
   var vm = new Vue({
-    el: '#page1',
+    el: "#page1",
     data: {
-      users: [{ label: '马六', value: 4 }, { label: '王五', value: 3 }, { label: '张三', value: 1 }, { label: '李四', value: 2 }],
-      addresss: ['会议室1', '会议室2', '会议室3', '会议室4'],
-      images: ['img/1.jpg', 'img/2.jpg', 'img/3.jpg', 'img/4.jpg'],
+      users: [
+        {
+          label: "马六",
+          value: 4,
+        },
+        {
+          label: "王五",
+          value: 3,
+        },
+        {
+          label: "张三",
+          value: 1,
+        },
+        {
+          label: "李四",
+          value: 2,
+        },
+      ],
+      addresss: ["会议室1", "会议室2", "会议室3", "会议室4"],
+      images: ["img/1.jpg", "img/2.jpg", "img/3.jpg", "img/4.jpg"],
       showImg: false,
       form: {
-        title: '',
+        title: "",
         showUser: false,
-        addressType: 'old',
-        addresss: '',
-        userlist: '',
+        addressType: "old",
+        addresss: "",
+        userlist: "",
         duanxin: true,
         startTime: null,
-        endTime: null
+        endTime: null,
       },
-      contentHeight: 'auto'
+      contentHeight: "auto",
     },
     created: function () {
+      console.log(window.navigator);
       setTimeout(() => {
         this.setContentHeight();
       }, 0);
+      const key = "abc";
+      const data1 = {
+        [key]: "111",
+      };
+      const arr = [
+        {
+          id: 1,
+          label: "aa",
+        },
+        {
+          id: 2,
+          label: "bb",
+        },
+        {
+          id: 2,
+          label: "bb",
+        },
+        {
+          id: 3,
+          label: "cc",
+        },
+      ];
+      const newArr = new Set(arr);
+      const unique = [...newArr];
     },
     mounted: function () {
       var inst = this;
       window.onresize = function () {
         inst.setContentHeight();
-      }
+      };
     },
     methods: {
-      setContentHeight: function () { // 设置滑动高度
-        var h = $('.header').height();
-        this.contentHeight = (document.documentElement.clientHeight - h) + 'px';
+      setContentHeight: function () {
+        // 设置滑动高度
+        var h = $(".header").height();
+        this.contentHeight = document.documentElement.clientHeight - h + "px";
       },
       submit: function () {
         console.log(this.form);
@@ -167,31 +222,64 @@
       show: function () {
         // this.showImg = true;
         // this.$notify({ type: 'primary', message: '通知内容' })
-        this.$dialog.alert({
-          title: '弹窗标题',
-          width: '80%',
-          message: '弹窗内容',
-          className: 'myalert',
-          theme: 'round-button',
-          messageAlign: 'center',
-          showConfirmButton: true,
-          showCancelButton: false,
-          confirmButtonText: '确认',
-          confirmButtonColor: 'rgb(28, 132, 227)',
-          cancelButtonText: '取消',
-          cancelButtonColor: 'rgb(255, 106, 106)',
-        }).then(() => {
-          // on confirm
-          console.log('ok');
-        }).catch(() => {
-          // on cancel
-          console.log('cancel');
-        });
+        this.$dialog
+          .alert({
+            title: "弹窗标题",
+            width: "80%",
+            message: "弹窗内容",
+            className: "myalert",
+            theme: "round-button",
+            messageAlign: "center",
+            showConfirmButton: true,
+            showCancelButton: false,
+            confirmButtonText: "确认",
+            confirmButtonColor: "rgb(28, 132, 227)",
+            cancelButtonText: "取消",
+            cancelButtonColor: "rgb(255, 106, 106)",
+          })
+          .then(() => {
+            // on confirm
+            console.log("ok");
+          })
+          .catch(() => {
+            // on cancel
+            console.log("cancel");
+          });
+      },
+    },
+  });
 
+  let p1 = new Promise((resolve, reject) => {
+    $.ajax({
+      url: 'xxx',
+      data: {},
+      type: 'get',
+      async: false,
+      dataType: "jsonp",
+      jsonp: "callback",
+      success: function (res) {
+        if (res.result != "success") {
+          //ip不一致
+          loginflag = false;
+          alert("请联系管理员进行ip变更!");
+          return;
+        } else {
+          resolve();
+        }
+      },
+      error: function (err) {
+        loginflag = false;
+        alert("请联系管理员进行ip变更!");
+        return;
       }
-    }
+    })
+  })
+
+  Promise.all([p1]).then((result) => {
+    document.getElementById('fm1').submit();           
+  }).catch((error) => {
+    console.log(error)
   })
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>
